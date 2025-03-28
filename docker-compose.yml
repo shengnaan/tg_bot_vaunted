@@ -1,0 +1,9 @@
+services:
+  bot:
+    container_name: tg_bot_vaunted
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
