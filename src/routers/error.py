@@ -10,8 +10,8 @@ error_router = Router()
 
 @error_router.errors()
 async def error_handler(error: ErrorEvent) -> bool:
-    """Глобальное логирование всех ошибок"""
-    error_message = f"""
+    logger.error(
+        f"""
     ❌ Ошибка в боте!
     🔹 Тип: {type(error.exception).__name__}
     🔹 Сообщение: {error.exception}
@@ -19,5 +19,5 @@ async def error_handler(error: ErrorEvent) -> bool:
     🔹 Трассировка:
     {traceback.format_exc()}
     """
-    logger.error(error_message)
+    )
     return True
