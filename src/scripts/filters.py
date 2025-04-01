@@ -1,8 +1,10 @@
-import logging
+from aiogram.filters import BaseFilter
+from aiogram.types import Message
 
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO
-)
 
-logger = logging.getLogger(__name__)
+class AdminFilter(BaseFilter):
+    def __init__(self) -> None:
+        self.allowed_users = [773812717]
+
+    async def __call__(self, message: Message) -> bool:
+        return not message.from_user.id not in self.allowed_users

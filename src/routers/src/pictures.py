@@ -11,6 +11,8 @@ pictures_router = Router()
 @pictures_router.message(Command("meow"))
 async def meow(message: Message) -> None:
     msg = await message.reply("Ищу кота...")
+    print(msg.from_user.id)
+    await msg.delete()
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(get_url_with_random_tag()) as resp:
