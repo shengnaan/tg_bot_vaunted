@@ -95,4 +95,4 @@ class Settings:
         BotCommand(command="/send", description="Написать пете п.")
     ]
     ADMIN_ID = int(os.getenv("ADMIN_ID"))
-    NASTYA_ID = int(os.getenv("NACTYA_ID"))
+    NASTYA_ID = int(os.getenv("NASTYA_ID"))

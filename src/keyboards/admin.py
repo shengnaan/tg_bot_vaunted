@@ -7,3 +7,12 @@ admin_keyboard = InlineKeyboardMarkup(
         ],
     ]
 )
+
+confirm_admin_send_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text="Да!!!", callback_data="confirm_admin"),
+            InlineKeyboardButton(text="Не, перепишу", callback_data="cancel_admin"),
+        ],
+    ]
+)

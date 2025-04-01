@@ -29,6 +29,7 @@ async def send(message: Message, state: FSMContext) -> None:
     StateFilter(SendStates.waiting_for_msg)
 )
 async def process_send(message: Message, state: FSMContext) -> None:
+    await message.delete()
     await message.answer(
         text="Отправляю Петьке это сообщение?"
     )
@@ -50,7 +51,8 @@ async def confirm_resend(c: CallbackQuery, state: FSMContext) -> None:
         Settings.ADMIN_ID,
         reply_markup=ReplyKeyboardRemove(),
     )
-
+    await c.message.delete()
+    await c.message.answer("Отправил!")
 
 
 @sender_router.callback_query(
@@ -58,6 +60,7 @@ async def confirm_resend(c: CallbackQuery, state: FSMContext) -> None:
 )
 async def cansel_resend(c: CallbackQuery, state: FSMContext) -> None:
     await c.answer()
+    await c.message.delete()
     await c.message.answer(
         text="Лаааадна, думай"
     )
