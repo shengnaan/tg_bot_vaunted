@@ -1,8 +1,8 @@
-from aiogram import Router, F
+from aiogram import F, Router
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import StatesGroup, State
-from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
 
 from core.config import Settings
 from src.keyboards.admin import admin_keyboard
@@ -58,7 +58,7 @@ async def confirm_resend(c: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     msg = data["message"]
     await msg.copy_to(
-        Settings.NACTYA_ID,
+        Settings.NASTYA_ID,
         reply_markup=ReplyKeyboardRemove(),
     )
 

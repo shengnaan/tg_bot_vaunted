@@ -14,18 +14,20 @@ async def meow(message: Message) -> None:
     print(msg.from_user.id)
     await msg.delete()
     try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(get_url_with_random_tag()) as resp:
-                if resp.status == 200:
-                    photo = await resp.read()
-                    await message.answer_photo(
-                        photo=BufferedInputFile(
-                            file=photo,
-                            filename="cat.png"
-                        )
+        async with (
+            aiohttp.ClientSession() as session,
+            session.get(get_url_with_random_tag()) as resp
+        ):
+            if resp.status == 200:
+                photo = await resp.read()
+                await message.answer_photo(
+                    photo=BufferedInputFile(
+                        file=photo,
+                        filename="cat.png"
                     )
-                    await msg.delete()
-                else:
-                    await message.answer("Не получилось найти котиков 🐾. Наверное они шпят...")
+                )
+                await msg.delete()
+            else:
+                await message.answer("Не получилось найти котиков 🐾. Наверное они шпят...")
     except Exception:
         await message.answer("Произошла ошибка. Котики в отпуске 😿")
